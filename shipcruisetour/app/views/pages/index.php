@@ -177,7 +177,7 @@
           <div class="row">
             <div class="col-lg-5">
               <div class="section-heading">
-                <h2>Visit One Of Our Countries Now</h2>
+                <h2>Cast a glance on various countries</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
               </div>
             </div>
@@ -199,17 +199,17 @@
                             <h4>SWITZERLAND</h4>
                             <span>Europe</span>
                             <div class="main-button">
-                              <a href="about.html">Explore More</a>
+                              <a href="">Explore More</a>
                             </div>
-                            <p>Woox Travel is a professional Bootstrap 5 theme HTML CSS layout for your website. You can use this layout for your commercial work.</p>
+                            <p>ShipCruiseTour Travel is aipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolor sit amet, consectetur ad.</p>
                             <ul class="info">
                               <li><i class="fa fa-user"></i> 8.66 Mil People</li>
                               <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                              <li><i class="fa fa-home"></i> $1.100.200</li>
+                              <!-- <li><i class="fa fa-home"></i> $1.100.200</li> -->
                             </ul>
-                            <div class="text-button">
+                            <!-- <div class="text-button">
                               <a href="about.html">Need Directions ? <i class="fa fa-arrow-right"></i></a>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -228,17 +228,17 @@
                             <h4>CARIBBEAN</h4>
                             <span>North America</span>
                             <div class="main-button">
-                              <a href="about.html">Explore More</a>
+                              <a href="">Explore More</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
                             <ul class="info">
                               <li><i class="fa fa-user"></i> 44.48 Mil People</li>
                               <li><i class="fa fa-globe"></i> 275.400 km2</li>
-                              <li><i class="fa fa-home"></i> $946.000</li>
+                              <!-- <li><i class="fa fa-home"></i> $946.000</li> -->
                             </ul>
-                            <div class="text-button">
+                            <!-- <div class="text-button">
                               <a href="about.html">Need Directions ? <i class="fa fa-arrow-right"></i></a>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -257,23 +257,23 @@
                             <h4>FRANCE</h4>
                             <span>Europe</span>
                             <div class="main-button">
-                              <a href="about.html">Explore More</a>
+                              <a href="">Explore More</a>
                             </div>
-                            <p>We hope this WoOx template is useful for you, please support us a <a href="https://paypal.me/templatemo" target="_blank">small amount of PayPal</a> to info [at] templatemo.com for our survival. We really appreciate your contribution.</p>
+                            <p>We hope this WoOx template is useful for you, please support us a small amount of PayPal to info [at] templatemo.com for our survival. We really appreciate your contribution.</p>
                             <ul class="info">
                               <li><i class="fa fa-user"></i> 67.41 Mil People</li>
                               <li><i class="fa fa-globe"></i> 551.500 km2</li>
-                              <li><i class="fa fa-home"></i> $425.600</li>
+                              <!-- <li><i class="fa fa-home"></i> $425.600</li> -->
                             </ul>
-                            <div class="text-button">
+                            <!-- <div class="text-button">
                               <a href="about.html">Need Directions ? <i class="fa fa-arrow-right"></i></a>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-12">
+                  <!-- <div class="col-lg-12">
                     <ul class="page-numbers">
                       <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
                       <li><a href="#">1</a></li>
@@ -281,7 +281,7 @@
                       <li><a href="#">3</a></li>
                       <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -296,9 +296,23 @@
                 </div>
               </div>
             </div>
+
+            <img src="<?php echo URLROOT ?>/img/maxresdefault.jpg" style="height: 400; " class="img-fluid" alt="Responsive image">
+            
+            <div id="text-1858494404" rc-version="0.0.164" class="text__base">
+  <h1 style="text-align: left;"><span class="text-navy"><span class="subHeading"><span style="text-align: center;font-weight: normal;">THE MOST EXCITING CRUISE DESTINATIONS<br />
+</span></span> <span class="heading1"><span class="heading1" style="font-weight: normal;line-height: 100.0%;">AND AWARD-WINNING SHIPS </span></span></span></h1>
+<p style="text-align: left;"><span class="text-darker-gray"><span class="p">Unlock some of the most incredible travel destinations. Get on island time and unwind on some of the best beaches in the world, venture deep into the rainforests, and snorkel the most vibrant reefs on a Caribbean or Bahamas cruise getaway with the whole family.</span></span></p>
+<p style="text-align: left;"><span class="text-darker-gray"><span class="p">Earn your wilderness badge as you cruise between the Alaska glaciers, pan for gold in prospecting towns, and trek across the rugged tundra on an Alaska vacation. And savor a burst of flavors throughout culture-rich ports in the Mediterranean, the British Isles, Scandinavia and beyond on an unforgettable cruise through Europe. No matter where in the world you choose to wander, cruises can take you deep into top-rated cruise ports and off-the-beaten-path gems, so you can experience each one like a local.</span></span></p>
+<p style="text-align: left;"><span class="text-darker-gray"><span class="p">It all starts with the boldest cruise ships at sea — and ours have won awards for everything from world class dining and spectacular entertainment, to record-setting onboard thrills and groundbreaking innovation. Whether you’re traveling solo or vacationing with the whole extended family, you’ll have all kinds of ahh-inducing cruise rooms to choose from, like affordable connecting staterooms that are perfect for groups, romantic rooms for couples craving rejuvenation and relaxation, and even a thrill-filled Ultimate Family Suite with a private game room and in-suite slide.</span></span></p>
+<p style="text-align: left;"> </p>
+
+</div></div>
           </div>
         </div>
+        
       </div>
+      
 
 
 
@@ -311,3 +325,5 @@
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+
+
