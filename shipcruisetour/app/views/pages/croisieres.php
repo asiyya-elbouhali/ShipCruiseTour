@@ -31,27 +31,28 @@
               <form id="search-form" name="gs" method="post" role="search" 
               action="<?= URLROOT?>/pages/croisieres">
                 <div class="row">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3"> 
                     <h4>Sort Cruises By:</h4>
                   </div>
+                  <!-- <?php var_dump($data['shipsOptions']) ?> -->
                   <div class="col-lg-2">
                       <fieldset>
                           <select name="ship" class="form-select" aria-label="Default select example" id="chooseLocation" onChange="this.form.click()">
                               <option selected>Ship</option>
-                              <?php foreach( $data['cruises'] as $cruise ) : ?>
+                              <?php foreach( $data['shipsOptions'] as $ship ) : ?>
 
-                              <option value="<?= $cruise->shipnom;?>"><?= $cruise->shipnom;?></option>
+                              <option value="<?= $ship->shipnom;?>"><?= $ship->shipnom;?></option>
                               <?php endforeach;  ?>
                           </select>
-                      </fieldset>
+                      </fieldset> 
                   </div>
                   <div class="col-lg-2">
                       <fieldset>
                           <select name="port" class="form-select" aria-label="Default select example" id="choosePrice" onChange="this.form.click()">
                               <option selected>Port</option>
-                              <?php foreach( $data['cruises'] as $cruise ) : ?>
+                              <?php foreach( $data['portsOptions'] as $port ) : ?>
 
-                              <option value="<?= $cruise->port_depart;?>"><?= $cruise->port_depart;   ?></option>
+                              <option value="<?= $port->portsChoices;?>"><?= $port->portsChoices;   ?></option>
                               <?php endforeach;  ?>
                           </select>
                       </fieldset>
@@ -59,11 +60,11 @@
                   <div class="col-lg-2">
 
                     <fieldset>
-                        <select name="Price" class="form-select" aria-label="Default select example" id="choosePrice" onChange="this.form.click()">
+                        <select name="date" class="form-select" aria-label="Default select example">
                             <option selected>Months</option>
-                            <?php foreach( $data['cruises'] as $cruise ) : ?>
+                            <?php foreach( $data['datesOptions'] as $date ) : ?>
 
-                            <option value="<?= $cruise->date_depart;   ?>"><?= $cruise->date_depart;?></option>
+                            <option value="<?= $date->month;   ?>"><?= $date->month;?></option>
                             <?php endforeach;  ?>
                         </select>
                     </fieldset>
@@ -91,11 +92,10 @@
               </div>
             </div>
 
-
-
-
-            <?php foreach( $data['cruises'] as $cruise ) : ?>
-
+        <?php foreach( $data['cruises'] as $cruise ) : 
+          if($data['reservedPlaces'] > $data['cruisePlaces']){
+          ?>
+          
             <div class="col-lg-6 col-sm-6">
               <div class="item">
                 <div class="row">
@@ -115,19 +115,56 @@
                         </div>
                         <div class="col-6">
                           <i class="fa fa-map"></i>
-                          <span class="list"><?php printf("%.2f",$cruise->prix ) ; ?></span>
+                          <span class="list"><?php printf("%.2f",$cruise->prix ) ; ?>$</span>
                         </div>
                       </div>
                       <p><?php echo $cruise->descriptif; ?></p>
                       <div class="main-button">
-                        <a href="<?= URLROOT; ?>/pages/booking/<?= $cruise->id; ?>">Make a Reservation</a>
+                        <a class="btn disabled" href="<?= URLROOT; ?>/pages/booking/<?= $cruise->id; ?>"
+                          >Make a Reservation</a>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+            <?php 
+          }else{
+            ?>
+            <div class="col-lg-6 col-sm-6">
+              <div class="item">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="image">
+                    <img src="../<?php echo $cruise->image; ?>" >
+                    </div>
+                  </div>
+                  <div class="col-lg-6 align-self-center">
+                    <div class="content">
+                      <span class="info">*Limited Places</span>
+                      <h4><?php echo $cruise->nom;?></h4>
+                      <div class="row">
+                        <div class="col-6">
+                          <i class="fa fa-clock"></i>
+                          <span class="list"><?php echo $cruise->nombre_nuits; ?> Nights</span>
+                        </div>
+                        <div class="col-6">
+                          <i class="fa fa-map"></i>
+                          <span class="list"><?php printf("%.2f",$cruise->prix ) ; ?>$</span>
+                        </div>
+                      </div>
+                      <p><?php echo $cruise->descriptif; ?></p>
+                      <div class="main-button">
+                        <a  href="<?= URLROOT; ?>/pages/booking/<?= $cruise->id; ?>" onclick="reservation()" id="testReservation" <?php if( $data['reservedPlaces'] > $data['cruisePlaces']){ echo ('aria-disabled');} ; ?> >Make a Reservation</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <?php endforeach;  ?>
+            <?php
+          }
+          endforeach;  ?>
            
          
               <div class="pag">
@@ -171,6 +208,28 @@
 
 
 
+      <!-- <script>
+
+
+            let testReservation = document.getElementById("testReservation");
+            testReservation.addEventListener("click",function(e){
+              alert("oooooooooooooooooooo");
+              e.preventDefault();
+
+            });
+                function reservation(e){
+                  // if(<?php $data['reservedPlaces'] > $data['cruisePlaces'] ?>){
+               
+              
+
+                e.preventDefault();
+                alert('Sorry This cruise is full!')
+               
+            
+                }
+            //  }
+            
+      </script> -->
 
 
 
@@ -184,3 +243,5 @@
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+
+

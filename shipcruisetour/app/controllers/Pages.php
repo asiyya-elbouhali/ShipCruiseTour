@@ -2,6 +2,10 @@
   class Pages extends Controller{
 
   protected $cruiseModel;
+  protected $shipModel;
+  protected $portModel;
+ 
+
   protected $clientreservationModel;
 
 
@@ -9,6 +13,9 @@
     public function __construct(){
 
       $this->cruiseModel = $this->model('Cruise');
+      $this->shipModel = $this->model('Ship');
+      $this->portModel = $this->model('Port');
+
       $this->clientreservationModel = $this->model('ClientReservation');
 
 
@@ -38,27 +45,61 @@
     // var_dump($_POST);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            // echo "post";
+            // echo "post"; 
       $port = $_POST['port'];
       $ship = $_POST['ship'];
+      $date = $_POST['date'];
 
-  $cruises = $this->cruiseModel->searchByPortShipDate($port,$ship,"123");
+
+  $cruises = $this->cruiseModel->searchByPortShipDate($port,$ship,$date);
+  $cruisePlaces = $this->cruiseModel->getPlaces();
+  $reservedPlaces = $this->cruiseModel->getReservedPlaces();
+  $shipsOptions = $this->shipModel->getShipsChoices();
+  $portsOptions = $this->portModel->getPortsChoices();
+  $datesOptions = $this->cruiseModel->getDatesChoices();
+
+
+
+
 
 
   $data = [
-    'cruises' => $cruises
+    'cruises' => $cruises, 
+    'cruisePlaces' => $cruisePlaces,
+    'reservedPlaces' => $reservedPlaces,
+    'shipsOptions' => $shipsOptions,
+    'portsOptions' => $portsOptions,
+    'datesOptions' => $datesOptions
+
+
   ];
  
 } else {
       // echo "get";
-  $cruises = $this->cruiseModel->getCruisesShipsPorts();
+  $cruises = $this->cruiseModel->getCruisesShipsPortsForClients();
+  $cruisePlaces = $this->cruiseModel->getPlaces();
+  $reservedPlaces = $this->cruiseModel->getReservedPlaces();
+  $shipsOptions = $this->shipModel->getShipsChoices();
+  $portsOptions = $this->portModel->getPortsChoices();
+  $datesOptions = $this->cruiseModel->getDatesChoices();
+
+
+
+
     //  die ("get");
 }
  
     
 
         $data = [
-          'cruises' => $cruises
+          'cruises' => $cruises,
+          'cruisePlaces' => $cruisePlaces,
+          'reservedPlaces' => $reservedPlaces,
+          'shipsOptions' => $shipsOptions,
+          'portsOptions' => $portsOptions,
+          'datesOptions' => $datesOptions
+
+
         ];
 
         // echo "<br><pre>";
@@ -70,6 +111,7 @@
 
 
       public function booking($id_cruise){
+      if($_SESSION){
 
       $roomscruise = $this->clientreservationModel->getRoomsCruiseById($id_cruise);
         //Set Data
@@ -81,6 +123,9 @@
 
         // Load about view
         $this->view('pages/booking', $data);
+      } else {
+      redirect('users/login');
+      }
 
       }
 
@@ -100,7 +145,7 @@
       }
 
 
-
+ 
 
     // Load Reservation page for client if logged in
     public function reservations($id_cruise){
@@ -109,7 +154,7 @@
 
 
       //Set Data
-      $data = [
+      $data = [ 
         'totalprice' => $totalprice
         
       ];

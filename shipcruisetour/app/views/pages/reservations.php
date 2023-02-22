@@ -12,6 +12,7 @@
       <th scope="col">Cruise</th>
       <th scope="col">Reservation Date</th>
       <th scope="col">Depart Date</th>
+      <th scope="col">Itineraire</th>
       <th scope="col">Room</th>
       <!-- <th scope="col">Qty</th> -->
       <th scope="col">Price</th>
@@ -27,20 +28,21 @@
       <td><?= $AllClientReservations->cruiseName;?></td>
       <td><?= $AllClientReservations->date;?></td>
       <td><?= $AllClientReservations->cruiseDepart;?></td>
+      <td><?= $AllClientReservations->itineraireCruise;?></td>
       <td><?= $AllClientReservations->roomType;?></td>
       <td><?php printf('%.2f',$AllClientReservations->prix );?>$</td>
       <td style="width: 2%;"> 
       <form class="btn btn-danger pull-right" action="<?= URLROOT; ?>/clientsreservations/delete/<?= $AllClientReservations->id_reservation?>" method="post">
       <input type="submit" class="btn btn-danger" value="Cancel">
     </form>
-</td>
+</td> 
     </tr> 
     <?php endforeach; ?>
   </tbody>
 </table>
 
 
-
+ 
 <div class="pag">
 <nav aria-label="Page navigation ">
   <ul class="pagination">
@@ -62,7 +64,7 @@
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Next</span>
       </a>
-    </li>
+    </li> 
     <?php endfor ;?>
   </ul>
 </nav>

@@ -18,7 +18,7 @@
 
 
     public function getShipsChoices() {
-    $this->db->query("SELECT DISTINCT ships.nom, ships.id  FROM cruises
+    $this->db->query("SELECT DISTINCT ships.nom AS shipnom , ships.id  FROM cruises
                       INNER JOIN ships
                       ON cruises.id_ship = ships.id
                       ");

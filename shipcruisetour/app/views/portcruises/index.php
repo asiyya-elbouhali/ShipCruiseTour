@@ -8,6 +8,8 @@
     <a class="nav-link" href="<?= URLROOT; ?>/ports">Ports</a>
     <a class="nav-link active" href="<?= URLROOT; ?>/cruises">Cruises</a>
     <a class="nav-link" href="<?= URLROOT; ?>/roomtypes">Room Types</a>
+    <a class="nav-link " href="<?= URLROOT; ?>/clientsreservations">Clients Reservations</a>
+
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">

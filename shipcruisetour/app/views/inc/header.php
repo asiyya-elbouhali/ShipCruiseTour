@@ -11,6 +11,7 @@
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/css/style.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/css/animate.css">
     <script src="<?php echo URLROOT ?>/js/script.js"></script>

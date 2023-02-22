@@ -15,6 +15,19 @@
       return $results;
     }
 
+
+    // Get All Posts 
+    public function getPortsChoices(){
+      $this->db->query("SELECT  DISTINCT (cruises.port_depart) AS portsChoices FROM cruises ");
+
+      $results = $this->db->resultset();
+
+      return $results;
+    }
+
+
+
+
     public function getPortNameById($id){
       $this->db->query('SELECT nom FROM ports WHERE id = :id');
 

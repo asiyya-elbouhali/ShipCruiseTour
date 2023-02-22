@@ -2,11 +2,11 @@
     <div class="container-fluid logo homeSearch">
         <img src="<?php echo URLROOT ?>/img/light logo.PNG" alt="">
       <!-- <a class="navbar-brand title_navbar"  href="#">Ship Cruise Tour</a> -->
-      <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+      <!-- <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
         <i class="fa fa-search fa-lg mt-1 " aria-hidden="true" style="margin-right: 10px; color: rgb(196, 196, 196); "></i>
         <input class="form-control transparent-input ml-4 form-control-sm w-90" type="text" placeholder="Search"
           aria-label="Search">
-      </form>
+      </form> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,13 +29,23 @@
                 <a class="nav-link" href="<?php echo URLROOT; ?>/ships">Management</a>
               </li>
               <?php endif; ?>
-            <?php if(isset($_SESSION['user_id'])) : ?>
+            <!-- <?php if(isset($_SESSION['user_id'])|| isset($_SESSION['client_id'])) : ?>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/booking">Booking</a>
               </li>
+              <?php endif; ?> -->
+
+              <?php if(isset($_SESSION['client_id'])) : ?>
+                <li class="nav-item">
+                <a class="nav-link" href="<?php echo URLROOT; ?>/clientsReservations">My Reservations </a>
+              </li>
+
+              <?php endif; ?>
+
+              <?php if(isset($_SESSION['user_id'])) : ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo URLROOT; ?>/clientsreservations">My Reservations </a>
+                <a class="nav-link" href="<?php echo URLROOT; ?>/clientsreservations">Clients Reservations </a>
               </li>
               <?php endif; ?>
 
@@ -47,7 +57,7 @@
                 Your Space
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-              <?php if(isset($_SESSION['user_id'])) : ?>
+              <?php if(isset($_SESSION['client_id']) || isset($_SESSION['user_id'])) : ?>
                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
                 <?php else : ?>
                 <li>

@@ -8,7 +8,7 @@
 
   
     public function __construct(){
-      if(!isset($_SESSION['user_id'])){
+      if(!isset($_SESSION)){
         redirect('users/login');
       }
       // Load Models
@@ -36,7 +36,7 @@
     $data = [
       'date' => date('y-m-d'),
       'prix' => $finalreservation->total,
-      'id_client' =>  $_SESSION['user_id'],
+      'id_client' =>   isset($_SESSION['client_id']) ? $_SESSION['client_id'] : $_SESSION['user_id'],
       'id_chambre' => trim($_POST['id_chambre']),
       'id_cruise' => trim($_POST['id_cruise']),
       'cruise' => $finalreservation->cruisename,
@@ -111,7 +111,7 @@
 
     // Load All Posts
     public function index(){
-    $id_client = $_SESSION['user_id'];
+    $id_client = $_SESSION['user_id']??$_SESSION['client_id'];
       $clientsreservations = $this->clientreservationModel->getAllClientsreservations();
       $clientReservations = $this->clientreservationModel->getAllClientreservationsById($id_client);
 
@@ -120,14 +120,17 @@
         'clientsreservations' => $clientsreservations,
         'AllClientReservations' => $clientReservations
       ]; 
+ 
+      if(isset($_SESSION['user_id'])){
+        //      //If admin is logged
 
-      if(isset($_SESSION['user_id']))
-      //If admin is logged
+      $this->view('clientsreservations/index', $data);
 
-      // $this->view('clientsreservations/index', $data);
-
-      //If client is logged
+      }else if(isset($_SESSION['client_id'])){
+        
         $this->view('pages/reservations', $data);
+
+      }
     }
 
  
@@ -158,13 +161,15 @@
     // Delete Post
     public function delete($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        
+        
         //Execute
         if($this->clientreservationModel->deleteReservation($id)){
           // Redirect to login
           flash('Reservations_message', 'Reservations is Canceled ');
           redirect('clientsreservations');
           } else {
-            die('Something went wrong');
+            die('Sorry You Can not cancel this reservation! ');
           }
       } else {
         redirect('clientsreservations');

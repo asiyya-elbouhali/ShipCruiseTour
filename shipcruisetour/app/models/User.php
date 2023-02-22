@@ -43,7 +43,7 @@
     }
 
     // Login / Authenticate User
-    public function login($email, $password){
+    public function login($email, $password, $role){
       $this->db->query("SELECT * FROM users WHERE email = :email");
       $this->db->bind(':email', $email);
 
@@ -68,8 +68,18 @@
     }
 
 
-    public function getUserByRole($role){
-    $this->db->query("SELECT * FROM users WHERE role = 1");
+    // public function getAdminByRole(){
+    // $this->db->query("SELECT * FROM users WHERE role = 1");
 
+    // }
+    public function getClientByRole($email){
+     $this->db->query("SELECT * FROM users WHERE role = 0 AND email = :email");
+     $this->db->bind(':email', $email);
+    $client = $this->db->single();
+     if($client){
+      return true;
+    } else {
+      return false;
     }
+      }
   }

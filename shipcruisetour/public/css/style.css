@@ -13,6 +13,11 @@ margin-left: 30%;}
   color: #000000 !important;
 }
 
+body{
+  overflow-x: hidden;
+}
+
+
 body:not(.light) {
     background: #ffffff;
     color: rgb(0, 0, 0);
@@ -729,6 +734,7 @@ a {
     border-bottom-left-radius: 23px;
     overflow: hidden!;
     height: 15rem;
+    width: 16rem;
     margin-bottom: 30%;
   }
 

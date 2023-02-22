@@ -25,8 +25,7 @@
     <a class="btn btn-dark" href="<?= URLROOT; ?>/cruises/edit/<?= $data['cruise']->id; ?>">Edit</a>
 
     <form class="pull-right" 
-    action="<?= URLROOT; ?>/cruises/delete/<?
-    = $data['cruise']->id; ?>" method="post">
+    action="<?= URLROOT; ?>/cruises/delete/<?= $data['cruise']->id; ?>" method="post">
       <input type="submit"
        class="btn btn-danger" value="Delete">
     </form>

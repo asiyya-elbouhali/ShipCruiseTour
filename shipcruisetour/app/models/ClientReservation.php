@@ -12,8 +12,24 @@
       $page_number = isset($_GET['page']) ? (int)$_GET['page']: 1;
       $page_number = $page_number < 1 ? 1 : $page_number;
       $offset = ($page_number - 1) * $Limit;
-      $this->db->queryPaginated("SELECT *
-                        FROM reservations  LIMIT $Limit OFFSET $offset");
+      $this->db->queryPaginated("SELECT reservations.*,
+                users.nom AS client,
+                cruises.nom AS cruise,
+                roomtypes.type AS roomType
+                FROM reservations
+                INNER JOIN users
+                ON reservations.id_client=users.id
+                
+                INNER JOIN cruises
+                ON reservations.id_cruise=cruises.id
+                
+                INNER JOIN rooms
+                ON reservations.id_chambre=rooms.id
+                
+                INNER JOIN roomtypes
+                ON roomtypes.id=rooms.id_type
+                 
+                LIMIT $Limit OFFSET $offset");
 
       $results = $this->db->resultset();
 
@@ -25,20 +41,20 @@
     $page_number = isset($_GET['page']) ? (int)$_GET['page']: 1;
     $page_number = $page_number < 1 ? 1 : $page_number;
     $offset = ($page_number - 1) * $Limit;
-
       $this->db->query("SELECT reservations.*,
-             reservations.id AS id_reservation,
-             cruises.date_depart AS cruiseDepart,
-             cruises.nom AS cruiseName,
-             roomtypes.type AS roomType,
-             users.nom AS clientName
-             FROM reservations
-             INNER JOIN cruises 
-             ON reservations.id_cruise = cruises.id
-             INNER JOIN rooms
-             ON reservations.id_chambre = rooms.id
-             INNER JOIN roomtypes
-             ON rooms.id_type=roomtypes.id
+              reservations.id AS id_reservation,
+              cruises.date_depart AS cruiseDepart,
+              cruises.nom AS cruiseName,
+              roomtypes.type AS roomType,
+              cruises.itineraire AS itineraireCruise,
+              users.nom AS clientName
+              FROM reservations
+              INNER JOIN cruises 
+              ON reservations.id_cruise = cruises.id
+              INNER JOIN rooms
+              ON reservations.id_chambre = rooms.id
+              INNER JOIN roomtypes
+              ON rooms.id_type=roomtypes.id
               INNER JOIN users
               ON reservations.id_client = users.id
               WHERE id_client= :id_client              
@@ -152,9 +168,7 @@ return $row;
     // Delete Post
     public function deleteReservation($id){
       // Prepare Query
-      $this->db->query('DELETE reservations  FROM reservations 
-                        INNER JOIN cruises ON cruises.id = reservations.id_cruise
-                        WHERE cruises.date_depart  > CURRENT_DATE + 2 AND reservations.id = :id');
+      $this->db->query('DELETE FROM reservations WHERE reservations.id_cruise in (SELECT id FROM cruises WHERE DATEDIFF(cruises.date_depart , CURRENT_DATE) > 2) AND reservations.id = :id');
 
       // Bind Values
       $this->db->bind(':id', $id);
@@ -167,3 +181,19 @@ return $row;
       }
     }
   }
+
+
+
+  // DELETE
+  //     FROM
+  //         reservations
+  //     WHERE
+  //     id =(
+  //             SELECT
+  //                 r.id
+  //             FROM
+  //                 reservations r
+  //             INNER JOIN cruises cr ON
+  //                 cr.id = r.id_cruise
+  //             WHERE
+  //                 MONTH(cr.date_depart) >= MONTH(CURRENT_DATE) AND YEAR(cr.date_depart) >= YEAR(CURRENT_DATE) AND DAY(cr.date_depart) > DAY(CURRENT_DATE) AND r.id = :id

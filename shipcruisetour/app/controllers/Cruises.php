@@ -17,11 +17,12 @@
        $this->portModel = $this->model('Port');
        $this->port_cruiseModel = $this->model('PortCruise');
 
-    }
-
+    } 
+ 
     // Load All Posts
     public function index(){
       $cruises = $this->cruiseModel->getCruisesShipsPorts();
+
       $data = [
         'cruises' => $cruises
       ];
@@ -92,6 +93,7 @@
 
         $data = [
           'nom' => trim($_POST['nom']),
+          'itineraire' => trim($_POST['itineraire']),
           'prix' => trim($_POST['prix']),
           'image' => trim($image),
           'nombre_nuits' => trim($_POST['nombrenuits']),
@@ -164,7 +166,10 @@
       
         $ships=$this->shipModel->getShips();
         $ports=$this->portModel->getPorts();
-
+        $todayDate = new DateTime("", new DateTimeZone('Europe/Paris'));
+        date_default_timezone_set('America/New_York');
+        echo date("Y-m-d", $todayDate->format('U'));
+        $dateNow=date("Y-m-d", $todayDate->format('U'));
         $data = [
           'nom' => '', 
           'prix' => '',
@@ -175,7 +180,8 @@
           'date_depart' => '',
           'id_ship' => '',
           'ports' => $ports,
-          'ships' => $ships
+          'ships' => $ships,
+          'date' => $dateNow
           
         ];
 
@@ -190,7 +196,7 @@
     // Edit Post
     public function edit($id){
 
- 
+  
 
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

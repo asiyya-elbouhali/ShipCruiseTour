@@ -8,6 +8,8 @@
     <a class="nav-link" href="<?= URLROOT; ?>/cruises">Cruises</a>
     <a class="nav-link active" href="<?= URLROOT; ?>/rooms">Rooms</a>
     <a class="nav-link " href="<?= URLROOT; ?>/roomtypes">Room Types</a>
+    <a class="nav-link " href="<?= URLROOT; ?>/clientsreservations">Clients Reservations</a>
+
 
 
   </div>
@@ -30,8 +32,8 @@
     <tr>
       <th scope="col">N°</th> 
       <th scope="col">Room Number:</th>
-      <th scope="col">Room type</th>
       <th scope="col">Ship</th>
+      <th scope="col">Room type</th>
 
     </tr>
   </thead>

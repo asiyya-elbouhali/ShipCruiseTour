@@ -32,18 +32,36 @@
               <span class="invalid-feedback"><?php echo $data['descriptif_err']; ?></span>
           </div>
           <div class="form-group">
+          <div class="addPort" id="addPortBtn">
+           <button>  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M5 21h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2zm2-10h4V7h2v4h4v2h-4v4h-2v-4H7v-2z"></path></svg></button>
+          </div>
+          <div class="" id="addPort">
+              <label>Choisi l'itinéraire:<sup>*</sup></label>
+              <hr>
+              <select id="portSelected"  name="itineraire" >
+          <option value=""  disabled selected hidden> </option>
+            <?php foreach($data['ports'] as $port) :?>
+            <option id="portOption" value="<?= $port->nom;?>"> <?= $port->nom;?></option>
+            <?php endforeach; ?>
+          </select>
+          <input type="hidden" id="itineraireValue" name="itineraire" value="">
+          </div>
+          </div>
+         
+          <div class="form-group" id="addPort">
               <label>Port de depart:<sup>*</sup></label>
               <hr>
-              <select name="port_depart" id="">
-          <option value=""> please choose a port </option>
+              <select  name="port_depart" >
+          <option value=""  disabled selected hidden> choose depart port </option>
             <?php foreach($data['ports'] as $port) :?>
             <option value="<?= $port->id;?>"> <?= $port->nom;?></option>
             <?php endforeach; ?>
           </select>
           </div>
+         
           <div class="form-group">
               <label>Date de depart:<sup>*</sup></label>
-              <input type="date" name="datedepart" class="form-control form-control-lg <?php echo (!empty($data['datedepart_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['date_depart']; ?></input>
+              <input type="date" name="datedepart" min="<?php echo $data['date']; ?>" class="form-control form-control-lg <?php echo (!empty($data['datedepart_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['date_depart']; ?></input>
               <span class="invalid-feedback"><?php echo $data['datedepart_err']; ?></span>
               </div>
         
@@ -61,4 +79,32 @@
       </div> 
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+
+
+
+<script>
+  const add = document.getElementById('addPort');
+  const port = document.getElementById('portOption');
+
+  document.getElementById('addPortBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+
+     
+  var selectElement = document.getElementById("portSelected");
+  var selectedOptionValue = selectElement.selectedOptions[0].textContent;
+    add.innerHTML += 
+    `<h6>Port:</h6><div class="itineraire">`+ selectedOptionValue+`</div>`;
+    const itineraire = document.getElementsByClassName('itineraire');
+          for(let i=0;i<itineraire.length;i++){
+            // console.log(itineraire[i].textContent);
+            const itineraireValues=itineraire[i].textContent;
+            console.log(itineraireValues);
+            document.getElementById('itineraireValue').value += itineraireValues + '-';
+          };
+          });
+          
+         
+          
+          
+</script>
    

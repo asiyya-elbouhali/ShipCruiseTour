@@ -5,7 +5,7 @@
    *  URL Format - /controller/method/param1/param2
    */
   class Core { 
-    // Set Defaults
+    // Set Defaults 
     protected $currentController = 'Pages'; // Default controller
     protected $currentMethod = 'index'; // Default method
     protected $params = []; // Set initial empty params array

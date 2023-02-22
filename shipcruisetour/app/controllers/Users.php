@@ -102,6 +102,9 @@
       }
     }
 
+
+
+
     public function login(){
       // Check if logged in
       if($this->isLoggedIn()){
@@ -116,9 +119,11 @@
         
         $data = [       
           'email' => trim($_POST['email']),
-          'password' => trim($_POST['password']),        
+          'password' => trim($_POST['password']),  
+          'role' => '' ,
           'email_err' => '',
-          'password_err' => '',       
+          'password_err' => '',
+
         ];
 
         // Check for email
@@ -139,18 +144,33 @@
           $data['email_err'] = 'This email is not registered.';
         }
 
+        if($this->userModel->getClientByRole($data['email'])){
+          $data['role'] = 0 ;
+        } else {
+          // No User
+          $data['role'] = 1 ;
+        }
+
         // Make sure errors are empty
         if(empty($data['email_err']) && empty($data['password_err'])){
 
           // Check and set logged in user
           $data['password'] = md5($data['password']);
-          $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+          $loggedInUser = $this->userModel->login($data['email'], $data['password'], $data['role']);
 
           if($loggedInUser){
-            // User Authenticated!
-            $this->createUserSession($loggedInUser);
 
-           
+            if($data['role'] == 0){
+              // client authentification
+              $this->createClientSession($loggedInUser);
+
+            } else if($data['role'] == 1){
+
+              // Admin Authenticated!
+              $this->createUserSession($loggedInUser);
+
+            }
+ 
           } else {
             $data['password_err'] = 'Password incorrect.';
             // Load View
@@ -169,6 +189,7 @@
         $data = [
           'email' => '',
           'password' => '',
+          'role' => '',
           'email_err' => '',
           'password_err' => '',
         ]; 
@@ -180,19 +201,34 @@
 
 
 
+    // Create Session With Client Info
+    public function createClientSession($user){
+      // session_destroy();
+
+      $_SESSION['client_id'] = $user->id;
+      $_SESSION['client_email'] = $user->email; 
+      $_SESSION['client_name'] = $user->nom;
+      $_SESSION['client_role'] = $user->role;
+
+
+
+    redirect('index');
+  }
 
 
 
     // Create Session With User Info
     public function createUserSession($user){
-
     
         $_SESSION['user_id'] = $user->id;
         $_SESSION['email'] = $user->email; 
         $_SESSION['name'] = $user->nom;
+        $_SESSION['role'] = $user->role;
 
+
+    redirect('clientsreservations');
   
-      redirect('ships');
+      // redirect('ships');
     }
 
     // Logout & Destroy Session
@@ -200,6 +236,8 @@
       unset($_SESSION['user_id']);
       unset($_SESSION['email']);
       unset($_SESSION['name']);
+      unset($_SESSION['role']);
+
       session_destroy();
       redirect('users/login');
     }
@@ -212,4 +250,14 @@
         return false;
       }
     }
+
+     // Check Admin is Logged In
+     public function AdminIsLoggedIn(){
+      if($_SESSION['role'] = 1){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   }

@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : lun. 16 jan. 2023 à 00:32
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 22 fév. 2023 à 14:41
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -61,30 +61,23 @@ CREATE TABLE `cruises` (
   `image` varchar(255) NOT NULL,
   `nombre_nuits` int(2) NOT NULL,
   `port_depart` varchar(30) NOT NULL,
-  `date_depart` datetime NOT NULL,
+  `date_depart` date NOT NULL,
   `id_ship` int(5) NOT NULL,
   `nom` varchar(300) NOT NULL,
-  `descriptif` varchar(10000) NOT NULL
+  `descriptif` varchar(10000) NOT NULL,
+  `itineraire` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `cruises`
 --
 
-INSERT INTO `cruises` (`id`, `prix`, `image`, `nombre_nuits`, `port_depart`, `date_depart`, `id_ship`, `nom`, `descriptif`) VALUES
-(23, 14, '', 14, 'SpainPort', '2023-01-11 00:00:00', 24, 'Atlantic Cruise', 'Descriptif '),
-(24, 30303, '', 30303, 'TmaraPort', '2023-01-14 00:00:00', 31, 'Fantastic Cruise', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et '),
-(25, 15, '', 78, 'Safi', '2023-01-09 00:00:00', 31, 'Over the sea', ''),
-(50, 99999, 'uploads/ReadyPlayerMe-Avatar_1.png', 25, 'safi', '2020-12-12 00:00:00', 30, '', ''),
-(51, 88, '', 88, 'SpainPort', '2020-12-12 00:00:00', 24, '', ''),
-(52, 36, 'uploads/pixil-frame-0(80).png', 36, 'SpainPort', '2020-12-12 00:00:00', 24, '', ''),
-(53, 14, 'uploads/ReadyPlayerMe-Avatar_1.png', 14, 'SpainPort', '2020-12-12 00:00:00', 31, '', ''),
-(54, 83, 'uploads/ReadyPlayerMe-Avatar_1.png', 86, 'SpainPort', '2000-05-04 00:00:00', 24, '', ''),
-(55, 45, 'uploads/ReadyPlayerMe-Avatar_1.png', 95, 'safi', '2023-01-26 00:00:00', 27, 'Glasgow free style', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et '),
-(56, 8, 'uploads/ReadyPlayerMe-Avatar_1.png', 43, 'SpainPort', '2002-05-08 00:00:00', 24, '', ''),
-(60, 59, 'uploads/ReadyPlayerMe-Avatar_1.png', 20, 'SpainPort', '1978-03-04 00:00:00', 31, '', ''),
-(72, 47, 'uploads/serenadeoftheseas_alaska_0.jpg', 4, 'SpainPort', '2008-10-23 00:00:00', 26, 'Illo ratione nisi el', 'Nam sit nostrum dolo'),
-(73, 27, 'uploads/serenadeoftheseas_alaska_0.jpg', 30, 'safi', '2002-11-22 00:00:00', 27, 'Vel fugiat suscipit', 'Et magna placeat pa');
+INSERT INTO `cruises` (`id`, `prix`, `image`, `nombre_nuits`, `port_depart`, `date_depart`, `id_ship`, `nom`, `descriptif`, `itineraire`) VALUES
+(98, 71, 'uploads/107146307-StoryLinesHeli.jpg', 36, 'safi', '2023-02-28', 33, 'Incididunt do aut co', 'Quas qui architecto', 'SpainPort- SpainPort- safi- SpainPort- safi- TmaraPort-'),
+(99, 90, 'uploads/RCI_WN_032022_CC_JGraham_Day_Aer.jpg', 32, 'TmaraPort', '2023-02-28', 26, 'Odio autem ut eos ni', 'Velit minim quo in', 'SpainPort- SpainPort- TmaraPort- SpainPort- TmaraPort- Id modi et distinct-'),
+(100, 73, 'uploads/maxresdefault.jpg', 8, 'safi', '2023-02-28', 28, 'Qui neque dolore eni', 'Veniam vero possimu', 'safi- safi- SpainPort- safi- SpainPort- TmaraPort-'),
+(101, 9, 'uploads/castaway-cay-1x1.jpg', 82, 'SpainPort', '2023-03-28', 27, 'Fugiat commodo dicta', 'Id reprehenderit eaq', 'TmaraPort- TmaraPort- safi- TmaraPort- safi- SpainPort-'),
+(102, 19000, 'uploads/istockphoto-104241367-612x612.jpg', 4, 'SpainPort', '2023-02-25', 26, 'Around The world', 'Free your mind and enjoy your life', 'SpainPort- SpainPort- safi- SpainPort- safi- SpainPort-');
 
 -- --------------------------------------------------------
 
@@ -137,7 +130,36 @@ INSERT INTO `port_cruise` (`id`, `id_port`, `id_cruise`) VALUES
 (10, 6, 52),
 (11, 6, 60),
 (12, 6, 72),
-(13, 10, 73);
+(13, 10, 73),
+(14, 8, 74),
+(15, 6, 75),
+(16, 10, 76),
+(17, 12, 77),
+(18, 12, 78),
+(19, 12, 79),
+(20, 8, 80),
+(21, 8, 81),
+(22, 6, 82),
+(23, 12, 83),
+(24, 8, 84),
+(25, 8, 85),
+(26, 10, 86),
+(27, 10, 87),
+(28, 12, 88),
+(29, 6, 89),
+(30, 6, 90),
+(31, 6, 91),
+(32, 8, 92),
+(33, 6, 93),
+(34, 8, 94),
+(35, 8, 95),
+(36, 12, 96),
+(37, 8, 97),
+(38, 10, 98),
+(39, 8, 99),
+(40, 10, 100),
+(41, 6, 101),
+(42, 6, 102);
 
 -- --------------------------------------------------------
 
@@ -181,60 +203,14 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `date`, `prix`, `id_client`, `id_cruise`, `id_chambre`) VALUES
-(56, '2023-01-12', 888888, 6, 55, 14),
-(59, '2023-01-12', 888888, 6, 55, 14),
-(76, '2023-01-12', 68, 6, 23, 16),
-(77, '2023-01-12', 68, 6, 23, 16),
-(78, '2023-01-12', 68, 6, 23, 16),
-(79, '2023-01-12', 68, 6, 23, 16),
-(80, '2023-01-12', 68, 6, 23, 16),
-(81, '2023-01-12', 68, 6, 23, 16),
-(82, '2023-01-12', 68, 6, 23, 16),
-(83, '2023-01-12', 68, 6, 23, 16),
-(84, '2023-01-12', 68, 6, 23, 16),
-(85, '2023-01-12', 68, 6, 23, 16),
-(86, '2023-01-12', 68, 6, 23, 16),
-(87, '2023-01-12', 68, 6, 23, 16),
-(88, '2023-01-12', 68, 6, 23, 16),
-(89, '2023-01-12', 68, 6, 23, 16),
-(90, '2023-01-12', 68, 6, 23, 16),
-(91, '2023-01-12', 68, 6, 23, 16),
-(92, '2023-01-12', 68, 6, 23, 16),
-(93, '2023-01-12', 68, 6, 23, 16),
-(94, '2023-01-12', 68, 6, 23, 16),
-(95, '2023-01-12', 68, 6, 23, 16),
-(96, '2023-01-12', 68, 6, 23, 16),
-(97, '2023-01-12', 68, 6, 23, 16),
-(98, '2023-01-12', 68, 6, 23, 16),
-(99, '2023-01-12', 68, 6, 23, 16),
-(100, '2023-01-12', 68, 6, 23, 16),
-(101, '2023-01-12', 68, 6, 23, 16),
-(102, '2023-01-12', 68, 6, 23, 16),
-(103, '2023-01-12', 68, 6, 23, 16),
-(104, '2023-01-12', 68, 6, 23, 16),
-(105, '2023-01-12', 68, 6, 23, 16),
-(106, '2023-01-12', 68, 6, 23, 16),
-(107, '2023-01-12', 68, 6, 23, 16),
-(108, '2023-01-12', 68, 6, 23, 16),
-(109, '2023-01-12', 68, 6, 23, 16),
-(110, '2023-01-12', 68, 6, 23, 16),
-(111, '2023-01-12', 68, 6, 23, 16),
-(112, '2023-01-12', 68, 6, 23, 16),
-(113, '2023-01-12', 68, 6, 23, 16),
-(114, '2023-01-12', 68, 6, 23, 16),
-(115, '2023-01-12', 68, 6, 23, 16),
-(116, '2023-01-12', 68, 6, 23, 16),
-(117, '2023-01-12', 68, 6, 23, 16),
-(118, '2023-01-12', 68, 6, 23, 16),
-(119, '2023-01-12', 68, 6, 23, 16),
-(120, '2023-01-12', 68, 6, 23, 16),
-(121, '2023-01-12', 68, 6, 23, 16),
-(122, '2023-01-12', 68, 6, 23, 16),
-(123, '2023-01-12', 68, 6, 23, 16),
-(124, '2023-01-12', 68, 6, 23, 16),
-(125, '2023-01-12', 68, 6, 23, 16),
-(126, '2023-01-12', 68, 6, 23, 16),
-(127, '2023-01-12', 68, 6, 23, 16);
+(146, '2023-02-21', 931, 7, 101, 14),
+(147, '2023-02-21', 159, 7, 98, 19),
+(148, '2023-02-22', 159, 7, 98, 19),
+(149, '2023-02-22', 159, 7, 98, 19),
+(152, '2023-02-22', 159, 6, 98, 19),
+(153, '2023-02-22', 159, 6, 98, 19),
+(154, '2023-02-22', 159, 6, 98, 19),
+(155, '2023-02-22', 159, 6, 98, 19);
 
 -- --------------------------------------------------------
 
@@ -256,9 +232,10 @@ CREATE TABLE `rooms` (
 INSERT INTO `rooms` (`id`, `room_number`, `id_ship`, `id_type`) VALUES
 (12, 66, 28, 1),
 (14, 363, 27, 5),
-(15, 231, 30, 5),
 (16, 45, 24, 1),
-(17, 654, 28, 7);
+(17, 654, 28, 7),
+(18, 12, 28, 4),
+(19, 363, 33, 4);
 
 -- --------------------------------------------------------
 
@@ -280,8 +257,7 @@ CREATE TABLE `roomtypes` (
 INSERT INTO `roomtypes` (`id`, `prix`, `capacite`, `type`) VALUES
 (1, 54, 1, 'Solo'),
 (4, 88, 2, 'Duo'),
-(5, 922, 4, 'famille'),
-(7, 95, 24, 'Duo');
+(5, 922, 4, 'famille');
 
 -- --------------------------------------------------------
 
@@ -302,15 +278,15 @@ CREATE TABLE `ships` (
 --
 
 INSERT INTO `ships` (`id`, `nom`, `nombre_chambres`, `nombre_places`, `image`) VALUES
-(24, 'Titanic', 200, 300, 'uploads/istockphoto-104241367-612x612.jpg'),
-(25, 'SeaKing', 300, 500, 'uploads/107146307-StoryLinesHeli.jpg'),
+(24, 'Titanic', 200, 6, 'uploads/istockphoto-104241367-612x612.jpg'),
+(25, 'SeaKing', 300, 4, 'uploads/107146307-StoryLinesHeli.jpg'),
 (26, 'OceanVue', 450, 600, 'uploads/1.jpg'),
-(27, 'SeaVectra', 500, 500, 'uploads/serenadeoftheseas_alaska_0.jpg'),
-(28, 'WonderTheSeas', 600, 500, 'uploads/220212144422-01-wonder-of-the-seas-royal-caribbean.jpg'),
+(27, 'SeaVectra', 4, 4, 'uploads/serenadeoftheseas_alaska_0.jpg'),
+(28, 'WonderTheSeas', 600, 4, 'uploads/220212144422-01-wonder-of-the-seas-royal-caribbean.jpg'),
 (29, 'image test', 11, 11, 'uploads/1.jpg'),
 (30, 'asiyyatest', 1, 1, 'uploads/rc-wonder-of-the-seas-sunset-aerial-LRGSTSHIP0422-8230b27121c3438b9984b9dc63877937.jpg'),
 (31, 'CanSea', 23, 32, 'uploads/220212144422-01-wonder-of-the-seas-royal-caribbean.jpg'),
-(33, 'Facilis sunt fugit', 7, 26, 'uploads/107146307-StoryLinesHeli.jpg');
+(33, 'Facilis sunt fugit', 7, 20, 'uploads/107146307-StoryLinesHeli.jpg');
 
 -- --------------------------------------------------------
 
@@ -338,7 +314,9 @@ INSERT INTO `users` (`id`, `nom`, `email`, `password`, `role`, `prenom`) VALUES
 (9, 'asiyya', 'a@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, ''),
 (10, 'abc', 'abc@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, ''),
 (11, 'test123456', 'test123456@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, NULL),
-(12, 'asiyyatest', 'asiyyatest@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, NULL);
+(12, 'asiyyatest', 'asiyyatest@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, NULL),
+(13, 'assiya', 'assiyatest@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, NULL),
+(14, 'asiyya', 'test1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -433,19 +411,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `cruises`
 --
 ALTER TABLE `cruises`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT pour la table `ports`
 --
 ALTER TABLE `ports`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `port_cruise`
 --
 ALTER TABLE `port_cruise`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
@@ -457,13 +435,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT pour la table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT pour la table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `roomtypes`
@@ -481,7 +459,7 @@ ALTER TABLE `ships`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Contraintes pour les tables déchargées
@@ -491,14 +469,13 @@ ALTER TABLE `users`
 -- Contraintes pour la table `cruises`
 --
 ALTER TABLE `cruises`
-  ADD CONSTRAINT `cruises_ibfk_1` FOREIGN KEY (`id_ship`) REFERENCES `ships` (`id`);
+  ADD CONSTRAINT `cruises_ibfk_1` FOREIGN KEY (`id_ship`) REFERENCES `ships` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `port_cruise`
 --
 ALTER TABLE `port_cruise`
-  ADD CONSTRAINT `port_cruise_ibfk_1` FOREIGN KEY (`id_port`) REFERENCES `ports` (`id`),
-  ADD CONSTRAINT `port_cruise_ibfk_2` FOREIGN KEY (`id_cruise`) REFERENCES `cruises` (`id`);
+  ADD CONSTRAINT `port_cruise_ibfk_1` FOREIGN KEY (`id_port`) REFERENCES `ports` (`id`);
 
 --
 -- Contraintes pour la table `reservations`
@@ -512,8 +489,7 @@ ALTER TABLE `reservations`
 -- Contraintes pour la table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`id_ship`) REFERENCES `ships` (`id`),
-  ADD CONSTRAINT `rooms_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `roomtypes` (`id`);
+  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`id_ship`) REFERENCES `ships` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -6,7 +6,7 @@
       $this->db = new Database;
     } 
 
-    // Get All Posts 
+    // Get All Posts  
     public function getCruises(){
       $this->db->query("SELECT *
                         FROM cruises");
@@ -17,6 +17,64 @@
     }
 
 
+    // Get All Places 
+    public function getPlaces(){
+      $this->db->query("SELECT SUM(ships.nombre_places) AS cruisePlaces FROM cruises INNER JOIN ships ON cruises.id_ship = ships.id");
+
+      $results = $this->db->resultset();
+
+      return $results;
+    }
+
+ 
+
+    // Get All Reserved Places 
+    public function getReservedPlaces(){
+      $this->db->query("SELECT SUM(roomtypes.capacite) AS placesReserved
+                        FROM reservations
+                        INNER JOIN rooms
+                        ON reservations.id_chambre = rooms.id
+                        INNER JOIN roomtypes
+                        ON rooms.id_type= roomtypes.id
+                        INNER JOIN cruises 
+                        ON reservations.id_cruise=cruises.id
+                        ");
+
+      $results = $this->db->resultset();
+
+      return $results;
+    }
+
+
+
+
+    // SELECT cruises.*,
+		// 				ships.nombre_places AS cruiseCapacity,
+		// 				SUM(roomtypes.capacite) AS placesReserved
+    //                     FROM cruises
+    //                     INNER JOIN ships
+    //                     ON cruises.id_ship=ships.id
+    //                     INNER JOIN reservations 
+    //                     ON reservations.id_cruise=cruises.id
+    //                     INNER JOIN rooms
+    //                     ON reservations.id_chambre = rooms.id
+    //                     INNER JOIN roomtypes
+    //                     ON rooms.id_type= roomtypes.id
+    //                     GROUP BY cruises.id
+    //                     HAVING ((cruiseCapacity > placesReserved) AND (cruises.date_depart > CURRENT_DATE))
+
+
+    // SELECT SUM(roomtypes.capacite) AS placesReserved
+    //                     FROM reservations
+    //                     INNER JOIN rooms
+    //                     ON reservations.id_chambre = rooms.id
+    //                     INNER JOIN roomtypes
+    //                     ON rooms.id_type= roomtypes.id
+    //                     INNER JOIN cruises 
+    //                     ON reservations.id_cruise=cruises.id
+    //                     WHERE cruises.nom=:cruiseName
+    
+ 
 
     // public function search(){
       
@@ -49,18 +107,55 @@
                         
                         ");
 
-      $results = $this->db->resultset();
+      $results = $this->db->resultset(); 
 
       return $results;
     }
 
 
-    
+    public function getCruisesShipsPortsForClients(){
+      $Limit = 6;
+      $page_number = isset($_GET['page']) ? (int)$_GET['page']: 1;
+      $page_number = $page_number < 1 ? 1 : $page_number;
+      $offset = ($page_number - 1) * $Limit;
+      $this->db->queryPaginated("SELECT cruises.*,
+      ships.nombre_places AS cruiseCapacity,
+      SUM(roomtypes.capacite) AS placesReserved
+                  FROM cruises
+                  INNER JOIN ships
+                  ON cruises.id_ship=ships.id
+                  INNER JOIN reservations 
+                  INNER JOIN rooms
+                  ON reservations.id_chambre = rooms.id
+                  INNER JOIN roomtypes
+                  ON rooms.id_type= roomtypes.id
+                  GROUP BY cruises.id
+                  HAVING ((cruises.date_depart > CURRENT_DATE) AND ships.nombre_places > SUM(roomtypes.capacite))
+                  ORDER BY cruises.prix ASC  LIMIT $Limit OFFSET $offset
+                        
+                        ");
+
+      $results = $this->db->resultset(); 
+
+      return $results;
+    }
+
+
+
+
+
+    public function getDatesChoices(){
+        $this->db->query('SELECT DISTINCT MONTH(date_depart) AS month FROM cruises ');
+        $results = $this->db->resultset();
+        return $results;
+
+
+    }
 
 
 
     
-    public function searchByPortShipDate($port, $ship){
+    public function searchByPortShipDate($port, $ship, $date){
                   $this->db->query("SELECT cruises.*,
                   ships.nom as shipnom,
                   ports.nom as portnom
@@ -74,7 +169,7 @@
                      INNER JOIN ports
                   ON port_cruise.id_port = ports.id
                   WHERE port_depart LIKE '$port' 
-                  OR ships.nom LIKE '$ship'");
+                  OR ships.nom LIKE '$ship' OR MONTH(cruises.date_depart) LIKE '$date' ");
  
       $results = $this->db->resultset();
 
@@ -114,8 +209,8 @@
       
       
       // Prepare Query
-      $this->db->query('INSERT INTO cruises ( nom,	id_ship, image, prix, nombre_nuits, date_depart, port_depart,descriptif) 
-      VALUES (:nom, :id_ship, :image, :prix, :nombre_nuits, :date_depart, :port_depart, :descriptif)');
+      $this->db->query('INSERT INTO cruises ( nom,	id_ship, image, prix, nombre_nuits, date_depart, port_depart,descriptif,itineraire) 
+      VALUES (:nom, :id_ship, :image, :prix, :nombre_nuits, :date_depart, :port_depart, :descriptif, :itineraire)');
       // Bind Values
 
       $this->db->bind(':nom', $data['nom']);
@@ -126,10 +221,8 @@
       $this->db->bind(':image', $data['image']);
       // $this->db->bind(':user_id', $data['user_id']);
       $this->db->bind(':nombre_nuits', $data['nombre_nuits']);
-      // $this->db->bind(':port_depart', $data['port_depart']);
-      $this->db->bind(':date_depart', $data['date_depart']);
-   
- 
+      $this->db->bind(':itineraire', $data['itineraire']);
+      $this->db->bind(':date_depart', $data['date_depart']); 
       
       //Execute
       if($this->db->execute()){

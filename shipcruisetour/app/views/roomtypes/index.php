@@ -10,6 +10,8 @@
     <a class="nav-link" href="<?= URLROOT; ?>/cruises">Cruises</a>
     <a class="nav-link" href="<?= URLROOT; ?>/rooms">Rooms</a>
     <a class="nav-link active" href="<?= URLROOT; ?>/roomtypes">Room Types</a>
+    <a class="nav-link " href="<?= URLROOT; ?>/clientsreservations">Clients Reservations</a>
+
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -35,7 +37,7 @@
   <tbody class="text-center">
     <tr>
       <th scope="row" class="counterCell"></th>
-      <td><?php echo $roomtype->prix; ?></td>
+      <td><?php printf("%.2f",$roomtype->prix ) ; ?>DH</td>
       <td><?php echo $roomtype->capacite; ?></td>
       <td><?php echo $roomtype->type; ?></td>
       <td>  <a class="btn btn-dark" href="<?php echo URLROOT; ?>/roomtypes/show/<?php echo $roomtype->id; ?>">More</a>

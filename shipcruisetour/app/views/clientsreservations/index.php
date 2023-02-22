@@ -23,7 +23,7 @@
   <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">  <table class="table bg-light ">
   <div class="col-md-6 ">
     </div>
-  <?php flash('room_message'); ?>
+  <!-- <?php flash('room_message'); ?> -->
 
   <div class="col-ml-6">
       <a class="btn btn-primary pull-right" href="<?php echo URLROOT; ?>/clientsreservations/add"><i class="fa fa-pencil" aria-hidden="true"></i> Add room</a>
@@ -35,31 +35,55 @@
       <th scope="col">Cruise</th>
       <th scope="col">Date</th>
       <th scope="col">Room Type</th>
-      <th scope="col">Qty</th>
+      <!-- <th scope="col">Qty</th> -->
       <th scope="col">Price</th>
 
 
 
-    </tr>
+    </tr> 
   </thead>
   <?php foreach($data['clientsreservations'] as $clientreservation):?>
   <tbody class="text-center">
     <tr>
       <th scope="row" class="counterCell"></th>
-      <td><?= $clientreservation->id_client;?></td>
-      <td><?= $clientreservation->id_cruise;?></td>
+      <td><?= $clientreservation->client;?></td>
+      <td><?= $clientreservation->cruise;?></td>
       <td><?= $clientreservation->date;?></td>
-      <td><?= $clientreservation->id_chambre;?></td>
-      <td><?= 0?></td>
-      <td><?= $clientreservation->prix;?></td>
+      <td><?= $clientreservation->roomType;?></td>
+      <!-- <td><?= 0?></td> -->
+      <td> <?php printf("%.2f",$clientreservation->prix ) ; ?>DH</td>
       <!-- <td>  <a class="btn btn-danger" href="<?php echo URLROOT; ?>/clientsreservations/delete/<?= $clientreservation->date;?>">Cancel</a>
 </td> -->
    </tr>
   </tbody>
   <?php endforeach; ?>
 </table></div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
-  <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+<div class="pag">
+                  <nav aria-label="Page navigation ">
+                  <ul class="pagination">
+                    <li class="page-item">
+                    <?php for($i = 1 ; $i <= 5 ; $i++): ?>
+
+                      <a class="page-link" href="<?= URLROOT?>/clientsreservations?page=<?=$i-1;?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <?php for($i = 1 ; $i <= 11 ; $i++): ?>
+                    <li class="page-item"><a class="page-link" href="<?= URLROOT?>/clientsreservations?page=<?=$i;?>"><?= $i;?></a></li>
+                    <?php endfor ;?>
+                  
+
+                    <li class="page-item">
+                      <a class="page-link" href="<?= URLROOT?>/clientsreservations?page=<?=$i+1;?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                    <?php endfor ;?>
+                  </ul>
+                  </nav>
+                </div>
 </div>
     
 
